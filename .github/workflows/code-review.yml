@@ -10,8 +10,8 @@ jobs:
       max-parallel: 2
       fail-fast: false
       matrix:
-        operating-system: [ windows-2019, ubuntu-18.04 ]
-        php: [ '7.4', '7.3' ]
+        operating-system: [ ubuntu-18.04, windows-2019 ]
+        php: [ '7.2', '7.3', '7.4' ]
 
     steps:
       - uses: actions/checkout@v2
@@ -38,7 +38,12 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        if: matrix.php == '7.2'
+        run: composer install --prefer-dist --no-progress --ignore-platform-req=php
+
+      - name: Install dependencies
+        if: matrix.php != '7.2'
+        run: composer install --prefer-dist --no-progress
 
       - name: Linting PHP Coding Standard
         run: composer cs:lint
