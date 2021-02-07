@@ -13,12 +13,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // Define what rule sets will be applied
     $parameters->set(Option::SETS, [
-        SetList::PHP_72,
         SetList::PHP_73,
-        SetList::PHPUNIT_80,
+        // SetList::PHPUNIT_80,
         SetList::PHPUNIT_90,
         SetList::PHPUNIT_91,
-        SetList::PHPSTAN,
 
         // SetList::CODE_QUALITY,
         // SetList::DEAD_CODE,
