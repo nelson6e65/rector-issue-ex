@@ -38,15 +38,11 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        if: matrix.php == '7.2'
-        run: composer install --prefer-dist --no-progress --ignore-platform-req=php
-
-      - name: Install dependencies
-        if: matrix.php != '7.2'
         run: composer install --prefer-dist --no-progress
 
       - name: Linting PHP Coding Standard
         run: composer cs:lint
 
       - name: Linting Rector improvements
+        if: matrix.php != '7.2'
         run: composer refactor:lint
